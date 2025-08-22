@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Smith - Life Optimization & Custom Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563eb;
+        }
+
+        main {
+            padding: 3rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .current-focus {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            border-color: #2563eb;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .project-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .bio {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .bio h3 {
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .writing-list {
+            margin-top: 1.5rem;
+        }
+
+        .writing-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .writing-item:last-child {
+            border-bottom: none;
+        }
+
+        .writing-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .writing-item .date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            border-top: 1px solid #eee;
+            padding: 2rem 0;
+            text-align: center;
+            color: #666;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-links a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .contact-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Sam Smith</a>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="projects">Projects</a></li>
+                    <li><a href="#" class="nav-link" data-page="writing">Writing</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h1>Helping People Discover Their Potential for AI Safety Impact</h1>
+                <p>I help people discover and fulfill their potential to make meaningful impact to ensure AI goes well for humanity. As Head of Dilemmas and Dangers in AI at Leaf, I create environments where people feel comfortable wrestling with difficult questions and developing their own insights. I also explore personal optimization tools and interdisciplinary thinking.</p>
+            </section>
+
+            <section class="section">
+                <h2>Current Focus</h2>
+                <div class="current-focus">
+                    <p><strong>Exploring upskilling agency and personal fit</strong> for different roles in AI Safety while continuing my work as Head of Dilemmas and Dangers in AI at Leaf. Currently designing and running courses for participants, applying for new opportunities, and exploring personal optimization tools as a side project.</p>
+                    <p style="margin-top: 1rem;"><strong>Based in Bristol, England</strong> • Head of DDAI at Leaf • Effective Altruism • Math exploration (set theory, fluid dynamics)</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Recent Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Modular Day Builder</h3>
+                        <p>A themed day planning system that replaces daily optimization with flexible structure. Features customizable time blocks, activity libraries, and theme templates to create distinct, memorable experiences while maintaining flexibility.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary">View Project</a>
+                            <a href="#" class="btn btn-secondary">Documentation</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3>Daily Progress Celebration Bar</h3>
+                        <p>A gamified progress tracking system that reframes daily satisfaction away from pure productivity toward celebrating the full spectrum of human fulfillment. Features ADHD-friendly feedback loops and unified progress visualization.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary">View Project</a>
+                            <a href="#" class="btn btn-secondary">Documentation</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Recent Writing</h2>
+                <div class="writing-list">
+                    <div class="writing-item">
+                        <h3>Why I Build Custom Life Optimization Tools</h3>
+                        <p class="date">Coming soon...</p>
+                        <p>Exploring the philosophy behind creating personalized solutions rather than adopting generic productivity systems.</p>
+                    </div>
+                    <div class="writing-item">
+                        <h3>From Course Leadership to Mathematics: A Transition Story</h3>
+                        <p class="date">Coming soon...</p>
+                        <p>Documenting the journey from running the DDAI fellowship to pursuing mathematical studies.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Projects Page -->
+        <div id="projects" class="page">
+            <section class="hero">
+                <h1>Projects</h1>
+                <p>Custom tools and experiments in life optimization, productivity, and human flourishing.</p>
+            </section>
+
+            <section class="section">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Modular Day Builder</h3>
+                        <p><strong>Problem:</strong> Daily optimization leads to decision fatigue and unmemorable "bit of everything" days.</p>
+                        <p><strong>Solution:</strong> Themed day templates with flexible time blocks and activity libraries. Users select a theme (Creative Sprint, Deep Focus, Explorer Mode) and customize with specific activities.</p>
+                        <p><strong>Tech:</strong> React with localStorage, modular design for future integration.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary">Live Demo</a>
+                            <a href="#" class="btn btn-secondary">GitHub</a>
+                            <a href="#" class="btn btn-secondary">Download</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Daily Progress Celebration Bar</h3>
+                        <p><strong>Problem:</strong> Over-optimization for productivity creates guilt around intrinsically valuable activities.</p>
+                        <p><strong>Solution:</strong> Unified progress tracking that celebrates physical, creative, social, learning, and rest activities equally. Gamified interactions with immediate dopamine feedback.</p>
+                        <p><strong>Tech:</strong> React with confetti animations, streak tracking, word cloud generation.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary">Live Demo</a>
+                            <a href="#" class="btn btn-secondary">GitHub</a>
+                            <a href="#" class="btn btn-secondary">Download</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Idea Capture & Development Pipeline</h3>
+                        <p><strong>Status:</strong> In Development</p>
+                        <p>Quick idea capture with hotkey activation and weekly review prompts to develop fleeting thoughts into actionable projects.</p>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Integrated Daily Hub</h3>
+                        <p><strong>Status:</strong> Planned</p>
+                        <p>Central dashboard combining day planning, progress tracking, idea capture, and reflection tools into a cohesive daily experience.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Writing Page -->
+        <div id="writing" class="page">
+            <section class="hero">
+                <h1>Writing</h1>
+                <p>Thoughts on life optimization, mathematics, AI safety, and the journey of building custom tools.</p>
+            </section>
+
+            <section class="section">
+                <div class="writing-list">
+                    <div class="writing-item">
+                        <h3>The Philosophy of Custom Life Optimization Tools</h3>
+                        <p class="date">Coming soon...</p>
+                        <p>Why building personalized solutions often works better than adopting generic productivity systems, and how to approach tool development with a user-centered mindset.</p>
+                    </div>
+                    
+                    <div class="writing-item">
+                        <h3>Themed Days vs. Daily Optimization</h3>
+                        <p class="date">Coming soon...</p>
+                        <p>How replacing daily decision-making with themed structures reduces cognitive load while creating more memorable and fulfilling experiences.</p>
+                    </div>
+                    
+                    <div class="writing-item">
+                        <h3>Building for ADHD Brains: Lessons from Bouldering</h3>
+                        <p class="date">Coming soon...</p>
+                        <p>What bouldering teaches us about designing feedback loops, celebrating progress, and maintaining motivation in personal productivity systems.</p>
+                    </div>
+
+                    <div class="writing-item">
+                        <h3>From Fellowship Leadership to Mathematics</h3>
+                        <p class="date">Coming soon...</p>
+                        <p>Documenting the transition from running the DDAI fellowship to pursuing mathematical studies, and what this shift reveals about career pivots and following curiosity.</p>
+                    </div>
+
+                    <div class="writing-item">
+                        <h3>Stream of Consciousness: [Topic]</h3>
+                        <p class="date">Coming soon...</p>
+                        <p>Unfiltered thoughts and explorations on [topic]. Part of an ongoing practice in thinking out loud and documenting intellectual journeys.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <section class="hero">
+                <h1>About</h1>
+                <p>Building custom tools, exploring mathematics, and thinking about human flourishing.</p>
+            </section>
+
+            <section class="section">
+                <div class="bio">
+                    <h3>Currently</h3>
+                    <p>I'm transitioning from my role as Course Leader for the DDAI (Digital Democracies and AI) fellowship at Leaf to pursue mathematics studies. This shift represents a move from operations-heavy work toward deeper intellectual exploration and preparation for university-level mathematics.</p>
+                    
+                    <p style="margin-top: 1rem;">I'm also building a suite of interconnected life optimization tools that address the specific challenges of maintaining motivation, structure, and fulfillment in remote, flexible work environments.</p>
+                </div>
+
+                <div class="bio">
+                    <h3>Background & Interests</h3>
+                    <p><strong>Location:</strong> Bristol, England</p>
+                    <p><strong>Current Work:</strong> Course Leader, DDAI Fellowship at Leaf</p>
+                    <p><strong>Study Focus:</strong> Mathematics (personal interest and university preparation)</p>
+                    <p><strong>Research Interests:</strong> AI Safety, Effective Altruism, life optimization systems</p>
+                    <p><strong>Activities:</strong> Bouldering (every other day), daily walks, guitar, writing, miniature painting</p>
+                </div>
+
+                <div class="bio">
+                    <h3>Philosophy & Approach</h3>
+                    <p>I believe in building custom solutions when existing tools don't fit perfectly. My approach to life optimization focuses on creating systems that work <em>with</em> human psychology rather than trying to force optimization.</p>
+                    
+                    <p style="margin-top: 1rem;">I'm particularly interested in how to design for ADHD brains, drawing inspiration from activities like bouldering that naturally provide clear feedback loops, immediate rewards, and long-term progression.</p>
+                </div>
+
+                <div class="bio">
+                    <h3>This Website</h3>
+                    <p>This site serves primarily as personal accountability and documentation of my projects and thinking. It's designed to be accessible to anyone curious about my work while serving as a reference for future me.</p>
+                    
+                    <p style="margin-top: 1rem;">I update it when inspired rather than on a fixed schedule, treating it as a living document that evolves with my projects and interests.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="contact-links">
+                <a href="mailto:sdms2005@gmail.com">Email</a>
+                <a href="https://www.linkedin.com/in/sam-smith%F0%9F%94%B8-617315227/">LinkedIn</a>
+                <a href="https://github.com/CrazyMage01">GitHub</a>
+            </div>
+            <p>&copy; 2025 Sam Smith. Built with curiosity and custom tools.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all nav links and pages
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // Add active class to clicked nav link
+                    this.classList.add('active');
+                    
+                    // Show corresponding page
+                    const targetPage = this.getAttribute('data-page');
+                    document.getElementById(targetPage).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
